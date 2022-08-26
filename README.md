@@ -1,6 +1,15 @@
+# Excel client for Materialize using ExcelDNA
 
 
+## Materialize demo set up
 
-## Known Limitations
+https://github.com/MaterializeInc/demos/tree/main/ecommerce-redpanda
 
-Only works with Excel 365 on Windows (Excel for Mac does not support the native C API that Excel-DNA uses).
+## Known limitations
+
+Only works with native Excel 365 on Windows.
+- Excel for Mac does not support the native C API that Excel-DNA uses).
+- Older versions of Excel don't support dynamic arrays.
+
+Order by clauses are not implemented.
+
