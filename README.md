@@ -13,3 +13,4 @@ Only works with native Excel 365 on Windows.
 
 Order by clauses are not implemented.
 
+Large grids are currently inefficient due to copy from multiset to 2d array.

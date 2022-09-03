@@ -1,6 +1,6 @@
 using AddinX.Bootstrap.Contract;
 using Autofac;
-using MaterializeExcelWPF;
+using MaterializeExcel.View;
 
 // using MaterializeExcelWPF.View;
 
@@ -14,7 +14,7 @@ namespace MaterializeExcelAddIn.Startup
         {
             var bootstrapper = (Bootstrapper)bootstrap;
 
-            bootstrapper?.Builder.RegisterType<MainWindow>();
+            bootstrapper?.Builder.RegisterType<MainControl>();
             // bootstrapper?.Builder.RegisterType<MainWindowViewModel>();
             //
             // bootstrapper?.Builder.RegisterType<MeetingWizardContainerViewModel>();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
 using System.Reactive.Linq;
@@ -10,26 +11,37 @@ public static class MzClientExtensions
 {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-    public static IObservable<MultiSet<MzData>> ProgressBatch(this IObservable<IMzUpdate> source)
+    public static IObservable<IEnumerable<MzDiff>> ProgressBatch(this IObservable<IMzUpdate> source)
     {
-        return source
-            .Do(update => Logger.Trace($"update {update}"))
+        // use publish/refcount otherwise the buffer marker observable continually resubscribes
+        var sourceRef = source.Publish().RefCount();
+        return sourceRef
             // group by progress markers
-            .Buffer(() => source.Where(u => u is MzProgress))
-            // filter out empty batches. There will always be one MzProgress
-            .Do(updates => Logger.Trace($"batch size {updates.Count}"))
-            .Scan(new MultiSet<MzData>(), (acc, current) =>
+            .Buffer(() => sourceRef.Where(u => u is MzProgress))
+            // Remove MzProgress marker, and cast to MzDiff
+            .Select(batch =>
             {
-                foreach (var mzUpdate in current)
-                {
-                    if (mzUpdate is MzDiff mzDiff)
-                    {
-                        acc[mzDiff.Data] += mzDiff.Multiplicity;
-                    }
-                }
+                batch.RemoveAt(batch.Count - 1);
+                return batch.Cast<MzDiff>();
+            })
+            // filter out empty batches. 
+            .Where(c => c.Any());
+    }
 
-                return acc;
-            });
+    public static IObservable<MultiSet<MzData>> ScanToMultiSet(this IObservable<IEnumerable<IMzUpdate>> source)
+    {
+        return source.Scan(new MultiSet<MzData>(), (acc, current) =>
+        {
+            foreach (var mzUpdate in current)
+            {
+                if (mzUpdate is MzDiff mzDiff)
+                {
+                    acc[mzDiff.Data] += mzDiff.Multiplicity;
+                }
+            }
+
+            return acc;
+        });
     }
 
     public static IObservable<object[,]> MultiSetTo2DArray(this IObservable<MultiSet<MzData>> source)
@@ -50,7 +62,7 @@ public static class MzClientExtensions
                 {
                     arr[0, i] = columns[i].ColumnName;
                 }
-                
+
                 var row = 1;
                 foreach (var pair in ms)
                 {

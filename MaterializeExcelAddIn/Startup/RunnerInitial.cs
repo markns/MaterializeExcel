@@ -2,7 +2,6 @@
 using AddinX.Bootstrap.Contract;
 using Autofac;
 using NLog;
-using Prism.Events;
 
 namespace MaterializeExcelAddIn.Startup
 {
@@ -22,7 +21,7 @@ namespace MaterializeExcelAddIn.Startup
             bootstrapper?.Builder.RegisterInstance<ILogger>(LogManager.GetLogger("MaterializeExcel"));
 
             // Event Aggregator
-            bootstrapper?.Builder.RegisterInstance<IEventAggregator>(new EventAggregator());
+            // bootstrapper?.Builder.RegisterInstance<IEventAggregator>(new EventAggregator());
 
         }
     }

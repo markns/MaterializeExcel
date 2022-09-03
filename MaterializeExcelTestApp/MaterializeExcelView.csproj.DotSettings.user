@@ -1,0 +1,3 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	
+	<s:String x:Key="/Default/CodeInspection/WebPathMapping/PathsInCorrectCasing/=_002E_002E_005CPACKAGES_005CMAHAPPS_002EMETRO_002E2_002E4_002E9_005CLIB_005CNET47_005CMAHAPPS_002EMETRO_002EDLL_005CSTYLES_005CCOLORS_002EXAML/@EntryIndexedValue">..\packages\MahApps.Metro.2.4.9\lib\net47\MahApps.Metro.dll\Styles\Colors.xaml</s:String></wpf:ResourceDictionary>

@@ -5,31 +5,35 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using NLog.Targets.Wrappers;
+using NLog;
 using Npgsql;
 
 namespace MaterializeClient;
 
 public class MzClient
 {
-    public MzClient(string host, int port, string database, string username)
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+    
+    public MzClient(string host, int port, string database, string user)
     {
         Host = host;
         Port = port;
         Database = database;
-        Username = username;
+        User = user;
     }
 
     private string Host { get; }
     private int Port { get; }
     private string Database { get; }
-    private string Username { get; }
+    private string User { get; }
 
     private NpgsqlConnection OpenConnection()
     {
+        Logger.Info($"Opening connection to {Host}:{Port}");
+        
         // todo: connection pooling?
         
-        var conn = new NpgsqlConnection($"host={Host};port={Port};database={Database};username={Username}");
+        var conn = new NpgsqlConnection($"host={Host};port={Port};database={Database};username={User}");
         // TODO: open async
         conn.Open();
         return conn;
@@ -85,7 +89,7 @@ public class MzClient
                         observer.OnNext(mzUpdate);
                     }
                 }
-            });
+            }, cancellationToken);
         });
     }
 
@@ -125,8 +129,4 @@ public class MzClient
         // If using a SELECT statement it is required to wrap this in parentheses.
         return query.ToUpper().Trim().StartsWith("SELECT") ? $"({query})" : query;
     }
-}
-
-public class MzColumns
-{
 }

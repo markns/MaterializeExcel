@@ -4,6 +4,8 @@ namespace MaterializeClient;
 
 public class MultiSet<TKey> : Dictionary<TKey, int>
 {
+    // TODO: we should garbage collect keys when the value becomes 0. Possibly not immediately.
+    
     public new int this[TKey key]
     {
         get
@@ -37,6 +39,6 @@ public class MultiSet<TKey> : Dictionary<TKey, int>
     //     if (ReferenceEquals(this, obj)) return true;
     //     if (obj.GetType() != this.GetType()) return false;
     //     return Equals((MultiSet<TKey>)obj);
-    // }
+    // } 
     
 }

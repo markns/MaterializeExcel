@@ -1,4 +1,4 @@
-namespace MaterializeExcelWPF
+﻿namespace MaterializeExcelView
 {
     /// <summary>
     /// Interaction logic for App.xaml

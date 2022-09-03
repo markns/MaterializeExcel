@@ -19,11 +19,11 @@ namespace MaterializeExcelAddIn
                             .Items(i =>
                             {
                                 https: //bert-toolkit.com/imagemso-list.html
-                                i.AddButton("Config").SetId("ConfigIdCmd")
-                                    .LargeSize().ImageMso("DataSourceCatalogServerScript").ShowLabel()
-                                    .Screentip("");
+                                // i.AddButton("Config").SetId("ConfigIdCmd")
+                                //     .LargeSize().ImageMso("DataSourceCatalogServerScript").ShowLabel()
+                                //     .Screentip("");
                                 i.AddButton("Data Catalog").SetId("DataCatalogIdCmd")
-                                    .LargeSize().ImageMso("SharingOpenCalendarFolder").ShowLabel()
+                                    .LargeSize().ImageMso("DataSourceCatalogServerScript").ShowLabel()
                                     .Screentip("");
                             });
                     }));
@@ -31,7 +31,7 @@ namespace MaterializeExcelAddIn
 
         protected override void CreateRibbonCommand(IRibbonCommands cmds)
         {
-            cmds.AddButtonCommand("ConfigIdCmd")
+            cmds.AddButtonCommand("DataCatalogIdCmd")
                 .IsEnabled(() => AddinContext.ExcelApp.Worksheets.Any()).IsVisible(() => true)
                 .Action(() => AddinContext.MainController.Sample.OpenForm());
         }
