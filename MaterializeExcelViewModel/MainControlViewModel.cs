@@ -1,22 +1,22 @@
-﻿using System.Reactive.Concurrency;
-using MaterializeClient;
-using MaterializeExcelViewModel.Services;
+﻿using System;
 using ReactiveUI;
 
 namespace MaterializeExcelViewModel
 {
+    
     public class MainControlViewModel : ReactiveObject
     {
-        public MainControlViewModel(IScheduler rxApp)
+        private readonly IObservable<string> errors;
+        
+        public MainControlViewModel(CatalogViewModel catalogViewModel)
         {
-            var mzClient = new MzClient("Marks-MacBook-Pro.local", 6875,
-                "materialize", "materialize");
-
-            Catalog = new CatalogViewModel(new CatalogService(mzClient), rxApp);
+            Catalog = catalogViewModel;
         }
 
         public CatalogViewModel Catalog { get; }
 
+        public IObservable<string> Errors => this.errors;
+        
 
     }
 }

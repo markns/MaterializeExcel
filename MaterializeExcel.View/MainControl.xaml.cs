@@ -1,24 +1,51 @@
 ﻿using System.Reactive.Concurrency;
+using System.Reactive.Disposables;
 using MaterializeExcelViewModel;
 using NLog;
+using ReactiveUI;
 
 namespace MaterializeExcel.View
 {
-    public partial class MainControl 
+    public partial class MainControl : ReactiveUserControl<MainControlViewModel>
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        
-        // public MainControl()
-        // {
-        //     Logger.Info($"-------------------- Starting main control");
-        //     
-        //     InitializeComponent();
-        //     DataContext = _viewModel;        }
 
-        public MainControl(IScheduler mainThreadScheduler)
+        public MainControl(MainControlViewModel mainControlViewModel)
         {
-            DataContext = new MainControlViewModel(mainThreadScheduler);
-            // throw new System.NotImplementedException();
+            InitializeComponent();
+            
+            // todo: is this the best place?
+            // Schedule an no-op action on the main thread, otherwise RxApp.MainThreadScheduler isn't initialized
+            // properly when running in Excel add in.
+            RxApp.MainThreadScheduler.Schedule(() => { });
+
+            this
+                .WhenActivated(
+                    disposables =>
+                    {
+                        ViewModel = mainControlViewModel;
+
+                        CatalogTree.ItemsSource = ViewModel?.Catalog.CatalogNodeViewModels;
+
+                        // Disposable
+                        //     .Create(
+                        //         () =>
+                        //         {
+                        //             // CommandManager.RemovePreviewCanExecuteHandler(this.tweetTextTextBox, this.OnTweetTextBoxPreviewCanExecute);
+                        //             // CommandManager.RemovePreviewExecutedHandler(this.tweetTextTextBox, this.OnTweetTextBoxPreviewExecuted);
+                        //         })
+                        //     .DisposeWith(disposables);
+
+                        // this
+                        //     .ViewModel
+                        //     .Errors
+                        //     .SelectMany(error => this.ShowMessage("Sorry, something has gone wrong", error))
+                        //     .Subscribe()
+                        //     .DisposeWith(disposables);
+
+                    });
+
+
         }
     }
 }

@@ -1,10 +1,10 @@
 
-using AddinX.Bootstrap.Contract;
 using Autofac;
-using NLog;
+using MaterializeExcelAddIn.Startup.Contract;
 
 namespace MaterializeExcelAddIn.Startup
 {
+    // ReSharper disable once UnusedType.Global
     internal class RunnerInitial : IRunner
     {
         public void Execute(IRunnerMain bootstrap)
@@ -12,13 +12,13 @@ namespace MaterializeExcelAddIn.Startup
             var bootstrapper = (Bootstrapper)bootstrap;
 
             // Excel Application
-            bootstrapper?.Builder.RegisterInstance(AddinContext.ExcelApp).ExternallyOwned();
+            bootstrapper?.Builder.RegisterInstance(AddInContext.ExcelApp).ExternallyOwned();
 
             // Ribbon
             bootstrapper?.Builder.RegisterInstance(new AddinRibbon());
 
             // ILogger
-            bootstrapper?.Builder.RegisterInstance<ILogger>(LogManager.GetLogger("MaterializeExcel"));
+            // bootstrapper?.Builder.RegisterInstance<ILogger>(new SerilogLogger());
 
             // Event Aggregator
             // bootstrapper?.Builder.RegisterInstance<IEventAggregator>(new EventAggregator());

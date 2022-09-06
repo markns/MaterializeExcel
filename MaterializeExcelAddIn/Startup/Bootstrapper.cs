@@ -1,13 +1,16 @@
+﻿using System;
 using System.Threading;
-using AddinX.Bootstrap.Autofac;
+using Autofac;
 using ExcelDna.Integration;
+using MaterializeExcelAddIn.Startup.Autofac;
+using Splat.Autofac;
 
 namespace MaterializeExcelAddIn.Startup
 {
-    internal class Bootstrapper : AutofacRunnerMain
+    public class Bootstrapper : AutofacRunnerMain
     {
-        public Bootstrapper(CancellationToken token) 
-                    : base(token)
+        public Bootstrapper(CancellationToken token)
+            : base(token)
         {
         }
 
@@ -19,7 +22,14 @@ namespace MaterializeExcelAddIn.Startup
         public override void ExecuteAll()
         {
             base.ExecuteAll();
-            AddinContext.Container = GetContainer();
+            AddInContext.Container = GetContainer();
+
+            var autofacResolver = AddInContext.Container.Resolve<AutofacDependencyResolver>();
+
+            // Set a lifetime scope (either the root or any of the child ones) to Autofac resolver.
+            // This is needed because Autofac became immutable since version 5+.
+            // https://github.com/autofac/Autofac/issues/811
+            autofacResolver.SetLifetimeScope(AddInContext.Container);
         }
     }
 }

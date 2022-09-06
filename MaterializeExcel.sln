@@ -6,15 +6,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeClient", "Materi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcelAddIn", "MaterializeExcelAddIn\MaterializeExcelAddIn.csproj", "{B38AC7EF-FD6D-4082-BC8F-ECF58F74C39F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcelTestApp", "MaterializeExcelTestApp\MaterializeExcelTestApp.csproj", "{D8341856-0809-434A-97DD-34E6F05E0CD5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcel.TestApp", "MaterializeExcel.TestApp\MaterializeExcel.TestApp.csproj", "{D8341856-0809-434A-97DD-34E6F05E0CD5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcelViewModel", "MaterializeExcelViewModel\MaterializeExcelViewModel.csproj", "{79DB185F-BB30-46A2-BA2D-7CCC5DF45541}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcelConsole", "MaterializeExcelConsole\MaterializeExcelConsole.csproj", "{87D9C1CB-BF9B-43EE-BA1D-14931566BD82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcel.Events", "MaterializeExcel.Events\MaterializeExcel.Events\MaterializeExcel.Events.csproj", "{20317431-BAAE-4483-9904-810C8BDEC2E7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcel.View", "MaterializeExcel.View\MaterializeExcel.View.csproj", "{056B24FF-2C58-4B2C-8152-6FEE4CFB2FB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcel.Events", "MaterializeExcel.Events\MaterializeExcel.Events.csproj", "{20317431-BAAE-4483-9904-810C8BDEC2E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +42,6 @@ Global
 		{87D9C1CB-BF9B-43EE-BA1D-14931566BD82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87D9C1CB-BF9B-43EE-BA1D-14931566BD82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87D9C1CB-BF9B-43EE-BA1D-14931566BD82}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20317431-BAAE-4483-9904-810C8BDEC2E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20317431-BAAE-4483-9904-810C8BDEC2E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20317431-BAAE-4483-9904-810C8BDEC2E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20317431-BAAE-4483-9904-810C8BDEC2E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{056B24FF-2C58-4B2C-8152-6FEE4CFB2FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{056B24FF-2C58-4B2C-8152-6FEE4CFB2FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{056B24FF-2C58-4B2C-8152-6FEE4CFB2FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU

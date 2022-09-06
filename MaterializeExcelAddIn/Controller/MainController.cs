@@ -4,20 +4,20 @@ namespace MaterializeExcelAddIn.Controller
 {
     public class MainController :IDisposable
     {
-        public MainController(SampleController sample
+        public MainController(TaskPaneController taskPane
             , WpfInteractionController wpfInteraction)
         {
-            Sample = sample;
+            TaskPane = taskPane;
             WpfInteraction = wpfInteraction;
         }
 
-        public SampleController Sample { get; private set; }
+        public TaskPaneController TaskPane { get; private set; }
 
         public WpfInteractionController WpfInteraction { get; private set; }
 
         public void Dispose()
         {
-            Sample.Dispose();
+            TaskPane.Dispose();
             WpfInteraction.Dispose();
         }
     }

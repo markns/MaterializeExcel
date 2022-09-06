@@ -32,28 +32,28 @@ namespace MaterializeExcelAddIn
         protected override void CreateRibbonCommand(IRibbonCommands cmds)
         {
             cmds.AddButtonCommand("DataCatalogIdCmd")
-                .IsEnabled(() => AddinContext.ExcelApp.Worksheets.Any()).IsVisible(() => true)
-                .Action(() => AddinContext.MainController.Sample.OpenForm());
+                .IsEnabled(() => AddInContext.ExcelApp.Worksheets.Any()).IsVisible(() => true)
+                .Action(() => AddInContext.MainController.TaskPane.OpenForm());
         }
 
         public override void OnClosing()
         {
-            AddinContext.TokenCancellationSource.Cancel();
+            AddInContext.TokenCancellationSource.Cancel();
 
-            AddinContext.MainController.Dispose();
+            AddInContext.MainController.Dispose();
 
-            AddinContext.ExcelApp.DisposeChildInstances(true);
-            AddinContext.ExcelApp = null;
+            AddInContext.ExcelApp.DisposeChildInstances(true);
+            AddInContext.ExcelApp = null;
 
-            AddinContext.Container.Dispose();
-            AddinContext.Container = null;
+            AddInContext.Container.Dispose();
+            AddInContext.Container = null;
         }
 
         public override void OnOpening()
         {
-            AddinContext.ExcelApp.SheetSelectionChangeEvent += (a, e) => Ribbon?.Invalidate();
-            AddinContext.ExcelApp.SheetActivateEvent += (e) => Ribbon?.Invalidate();
-            AddinContext.ExcelApp.SheetChangeEvent += (a, e) => Ribbon?.Invalidate();
+            AddInContext.ExcelApp.SheetSelectionChangeEvent += (a, e) => Ribbon?.Invalidate();
+            AddInContext.ExcelApp.SheetActivateEvent += (e) => Ribbon?.Invalidate();
+            AddInContext.ExcelApp.SheetChangeEvent += (a, e) => Ribbon?.Invalidate();
         }
     }
 }

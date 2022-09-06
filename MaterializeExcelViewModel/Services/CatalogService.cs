@@ -40,7 +40,7 @@ namespace MaterializeExcelViewModel.Services
                   order by database, schema, object_id, position";
 
             mzClient.Tail(query)
-                // .SubscribeOn(RxApp.TaskpoolScheduler)
+                .SubscribeOn(RxApp.TaskpoolScheduler)
                 .ProgressBatch()
                 .SelectMany(z => z)
                 .Subscribe(diff =>

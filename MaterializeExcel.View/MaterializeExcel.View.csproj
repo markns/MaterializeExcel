@@ -84,10 +84,27 @@
         <Compile Include="MainControl.xaml.cs">
           <DependentUpon>MainControl.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Nodes\ColumnNodeView.xaml.cs">
+          <DependentUpon>ColumnNodeView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Nodes\ObjectNodeView.xaml.cs">
+          <DependentUpon>ObjectNodeView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Nodes\SchemaNodeView.xaml.cs">
+          <DependentUpon>SchemaNodeView.xaml</DependentUpon>
+        </Compile>
+        <Compile Include="Nodes\DatabaseNodeView.xaml.cs">
+          <DependentUpon>DatabaseNodeView.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="UserControlExtensions.cs" />
     </ItemGroup>
     <ItemGroup>
       <Page Include="MainControl.xaml" />
+      <Page Include="Nodes\ColumnNodeView.xaml" />
+      <Page Include="Nodes\ObjectNodeView.xaml" />
+      <Page Include="Nodes\SchemaNodeView.xaml" />
+      <Page Include="Nodes\DatabaseNodeView.xaml" />
       <Page Include="Themes\Colours.xaml" />
       <Page Include="Themes\MaterialDesign.xaml" />
       <Page Include="Themes\TreeView.xaml" />

@@ -9,20 +9,16 @@ namespace MaterializeExcelAddIn.Controller
     public class WpfInteractionController : IDisposable
     {
         // private readonly IEventAggregator eventAgg;
-        private readonly ExcelInteraction excelOperation;
-        private readonly ILogger logger;
+        private readonly ExcelInteraction _excelInteraction;
         // private readonly SubscriptionToken tokenMeetingData;
-        // private readonly SubscriptionToken tokenSheetName;
+        private readonly IDisposable _addToSheetSubscription;
 
-        public WpfInteractionController(//IEventAggregator eventAgg,
-            ExcelInteraction excelOperation,
-            ILogger logger)
+        public WpfInteractionController(ExcelInteraction excelInteraction)
         {
             // this.eventAgg = eventAgg;
-            this.excelOperation = excelOperation;
-            this.logger = logger;
+            _excelInteraction = excelInteraction;
 
-            MessageBus.Current.Listen<AddToSheetEvent>()
+            _addToSheetSubscription = MessageBus.Current.Listen<AddToSheetRequest>()
                 // .Where(e => e.KeyCode == KeyCode.Up)
                 .Subscribe(x => Console.WriteLine(x.ObjectName));
             
@@ -46,27 +42,29 @@ namespace MaterializeExcelAddIn.Controller
         //         .Publish(response);
         // }
         //
-        // private void WriteMeetingData(ExcelMeetingDataRequest obj)
-        // {
-        //     logger.Debug("Write Meeting data");
-        //     try
-        //     {
-        //         excelOperation.WriteMeeting(obj);
-        //         eventAgg.GetEvent<PubSubEvent<ExcelMeetingDataResponse>>()
-        //             .Publish(new ExcelMeetingDataResponse
-        //             { ProcessCompletedSuccessfully = true });
-        //     }
-        //     catch (Exception)
-        //     {
-        //         eventAgg.GetEvent<PubSubEvent<ExcelMeetingDataResponse>>()
-        //             .Publish(new ExcelMeetingDataResponse
-        //             { ProcessCompletedSuccessfully = false });
-        //     }
-        //
-        // }
+        private void WriteMeetingData(AddToSheetRequest request)
+        {
+            // logger.Debug("Write Meeting data");
+            try
+            {
+                _excelInteraction.WriteQueryToSheet(request);
+                // eventAgg.GetEvent<PubSubEvent<ExcelMeetingDataResponse>>()
+                    // .Publish(new ExcelMeetingDataResponse
+                    // { ProcessCompletedSuccessfully = true });
+            }
+            catch (Exception)
+            {
+                // eventAgg.GetEvent<PubSubEvent<ExcelMeetingDataResponse>>()
+                    // .Publish(new ExcelMeetingDataResponse
+                    // { ProcessCompletedSuccessfully = false });
+            }
+        
+        }
 
         public void Dispose()
         {
+            _addToSheetSubscription.Dispose();
+            
             // eventAgg.GetEvent<PubSubEvent<ExcelMeetingDataRequest>>()
             //     .Unsubscribe(tokenMeetingData);
             //
