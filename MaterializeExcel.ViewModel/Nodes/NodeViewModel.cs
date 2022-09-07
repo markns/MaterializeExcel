@@ -8,11 +8,12 @@ using DynamicData;
 using DynamicData.Binding;
 using DynamicData.Kernel;
 using MaterializeExcel.Events;
-using MaterializeExcelViewModel.Services;
+using MaterializeExcel.ViewModel.Services;
+using MaterializeExcel.ViewModel.Services;
 using NLog;
 using ReactiveUI;
 
-namespace MaterializeExcelViewModel.Nodes
+namespace MaterializeExcel.ViewModel.Nodes
 {
     public abstract class NodeViewModel : ReactiveObject, IEquatable<NodeViewModel>
     {

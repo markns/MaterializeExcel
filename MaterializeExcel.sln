@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcelAddIn", "Ma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcel.TestApp", "MaterializeExcel.TestApp\MaterializeExcel.TestApp.csproj", "{D8341856-0809-434A-97DD-34E6F05E0CD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcelViewModel", "MaterializeExcelViewModel\MaterializeExcelViewModel.csproj", "{79DB185F-BB30-46A2-BA2D-7CCC5DF45541}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcel.ViewModel", "MaterializeExcel.ViewModel\MaterializeExcel.ViewModel.csproj", "{79DB185F-BB30-46A2-BA2D-7CCC5DF45541}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcelConsole", "MaterializeExcelConsole\MaterializeExcelConsole.csproj", "{87D9C1CB-BF9B-43EE-BA1D-14931566BD82}"
 EndProject

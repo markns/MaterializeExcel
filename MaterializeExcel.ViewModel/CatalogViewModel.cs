@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Reactive;
-using System.Reactive.Concurrency;
 using System.Reactive.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using DynamicData;
-using MaterializeExcelViewModel.Nodes;
-using MaterializeExcelViewModel.Services;
+using MaterializeExcel.ViewModel.Nodes;
+using MaterializeExcel.ViewModel.Services;
 using NLog;
-using NLog.Fluent;
-using NLog.Targets;
 using ReactiveUI;
 
-namespace MaterializeExcelViewModel
+namespace MaterializeExcel.ViewModel
 {
     public class CatalogViewModel : IDisposable
     {

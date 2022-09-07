@@ -1,11 +1,11 @@
 ﻿using System.Reactive.Disposables;
-using MaterializeExcelViewModel.Nodes;
+using MaterializeExcel.ViewModel.Nodes;
 using NLog;
 using ReactiveUI;
 
 namespace MaterializeExcel.View.Nodes
 {
-    public partial class ColumnNodeView : ReactiveUserControl<ColumnNodeViewModel>
+    public partial class ColumnNodeView
     {
         public ColumnNodeView()
         {

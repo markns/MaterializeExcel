@@ -123,9 +123,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MaterializeExcelViewModel\MaterializeExcelViewModel.csproj">
+    <ProjectReference Include="..\MaterializeExcel.ViewModel\MaterializeExcel.ViewModel.csproj">
       <Project>{79db185f-bb30-46a2-ba2d-7ccc5df45541}</Project>
-      <Name>MaterializeExcelViewModel</Name>
+      <Name>MaterializeExcel.ViewModel</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

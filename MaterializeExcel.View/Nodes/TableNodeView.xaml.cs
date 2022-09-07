@@ -1,6 +1,6 @@
 ﻿using System.Reactive.Disposables;
-using MaterializeExcelViewModel;
-using MaterializeExcelViewModel.Nodes;
+using MaterializeExcel.ViewModel;
+using MaterializeExcel.ViewModel.Nodes;
 using NLog;
 using ReactiveUI;
 

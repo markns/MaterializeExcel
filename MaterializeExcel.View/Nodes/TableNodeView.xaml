@@ -2,7 +2,7 @@
                                 x:TypeArguments="nodes:TableNodeViewModel"
                                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                                xmlns:nodes="clr-namespace:MaterializeExcelViewModel.Nodes;assembly=MaterializeExcelViewModel"
+                                xmlns:nodes="clr-namespace:MaterializeExcel.ViewModel.Nodes;assembly=MaterializeExcel.ViewModel"
                                 xmlns:reactiveUi="http://reactiveui.net"
                                 xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks">
     <Grid Margin="4">

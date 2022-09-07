@@ -1,7 +1,8 @@
 ﻿using DynamicData;
-using MaterializeExcelViewModel.Services;
+using MaterializeExcel.ViewModel.Services;
+using MaterializeExcel.ViewModel.Services;
 
-namespace MaterializeExcelViewModel.Nodes
+namespace MaterializeExcel.ViewModel.Nodes
 {
     public class SchemaNodeViewModel : NodeViewModel
     {

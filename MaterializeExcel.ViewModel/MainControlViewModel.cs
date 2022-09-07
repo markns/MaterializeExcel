@@ -1,7 +1,8 @@
 ﻿using System;
+using MaterializeExcel.ViewModel;
 using ReactiveUI;
 
-namespace MaterializeExcelViewModel
+namespace MaterializeExcel.ViewModel
 {
     
     public class MainControlViewModel : ReactiveObject

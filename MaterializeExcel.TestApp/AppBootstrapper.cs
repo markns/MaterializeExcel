@@ -2,9 +2,10 @@
 using MaterializeClient;
 using MaterializeExcel.View;
 using MaterializeExcel.View.Nodes;
-using MaterializeExcelViewModel;
-using MaterializeExcelViewModel.Nodes;
-using MaterializeExcelViewModel.Services;
+using MaterializeExcel.ViewModel;
+using MaterializeExcel.ViewModel;
+using MaterializeExcel.ViewModel.Nodes;
+using MaterializeExcel.ViewModel.Services;
 using ReactiveUI;
 using Splat;
 using Splat.Autofac;

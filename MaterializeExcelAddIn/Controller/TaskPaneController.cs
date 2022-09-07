@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using AddinX.Wpf.Contract;
 using ExcelDna.Integration.CustomUI;
 using MaterializeExcel.View;
-using MaterializeExcelViewModel;
+using MaterializeExcel.ViewModel;
+using MaterializeExcel.ViewModel;
 using ReactiveUI;
 using Splat;
 

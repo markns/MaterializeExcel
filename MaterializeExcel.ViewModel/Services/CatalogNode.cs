@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MaterializeExcelViewModel.Services
+namespace MaterializeExcel.ViewModel.Services
 {
     public interface ICatalogNode
     {

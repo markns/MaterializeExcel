@@ -7,8 +7,8 @@
     <ProjectGuid>{79DB185F-BB30-46A2-BA2D-7CCC5DF45541}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MaterializeExcelViewModel</RootNamespace>
-    <AssemblyName>MaterializeExcelViewModel</AssemblyName>
+    <RootNamespace>MaterializeExcel.ViewModel</RootNamespace>
+    <AssemblyName>MaterializeExcel.ViewModel</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

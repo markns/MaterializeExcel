@@ -1,7 +1,8 @@
 ﻿using Autofac;
 using MaterializeExcel.View;
+using MaterializeExcel.ViewModel;
 using MaterializeExcelAddIn.Startup.Contract;
-using MaterializeExcelViewModel;
+using MaterializeExcel.ViewModel;
 using ReactiveUI;
 using Splat.Autofac;
 

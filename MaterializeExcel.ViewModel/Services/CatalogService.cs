@@ -4,10 +4,11 @@ using System.Linq;
 using System.Reactive.Linq;
 using DynamicData;
 using MaterializeClient;
+using MaterializeExcel.ViewModel.Services;
 using NLog;
 using ReactiveUI;
 
-namespace MaterializeExcelViewModel.Services
+namespace MaterializeExcel.ViewModel.Services
 {
     public class CatalogService
     {

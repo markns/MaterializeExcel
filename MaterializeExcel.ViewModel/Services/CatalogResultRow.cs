@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Linq;
 using MaterializeClient;
+using MaterializeExcel.ViewModel.Services;
 
-namespace MaterializeExcelViewModel.Services
+namespace MaterializeExcel.ViewModel.Services
 {
     public class CatalogResultRow
     {

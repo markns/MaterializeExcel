@@ -1,7 +1,8 @@
 ﻿using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using MahApps.Metro.IconPacks;
-using MaterializeExcelViewModel;
+using MaterializeExcel.ViewModel;
+using MaterializeExcel.ViewModel;
 using NLog;
 using ReactiveUI;
 

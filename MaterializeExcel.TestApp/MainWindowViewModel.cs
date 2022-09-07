@@ -1,4 +1,5 @@
-﻿using MaterializeExcelViewModel;
+﻿using MaterializeExcel.ViewModel;
+using MaterializeExcel.ViewModel;
 using ReactiveUI;
 
 namespace MaterializeExcel.TestApp
