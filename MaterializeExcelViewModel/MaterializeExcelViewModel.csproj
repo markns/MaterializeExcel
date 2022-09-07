@@ -68,7 +68,8 @@
     <Compile Include="MainControlViewModel.cs" />
     <Compile Include="CatalogViewModel.cs" />
     <Compile Include="Nodes\ColumnNodeViewModel.cs" />
-    <Compile Include="Nodes\ObjectNodeViewModel.cs" />
+    <Compile Include="Nodes\SourceNodeViewModel.cs" />
+    <Compile Include="Nodes\TableNodeViewModel.cs" />
     <Compile Include="Nodes\DatabaseNodeViewModel.cs" />
     <Compile Include="Nodes\NodeViewModel.cs" />
     <Compile Include="Nodes\SchemaNodeViewModel.cs" />

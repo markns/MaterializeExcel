@@ -156,7 +156,9 @@
     <Compile Include="AddInContext.cs" />
     <Compile Include="AddinRibbon.cs" />
     <Compile Include="Controller\MainController.cs" />
-    <Compile Include="Controller\MainViewHost.cs" />
+    <Compile Include="Controller\MainViewHost.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Controller\MainViewHost.Designer.cs" />
     <Compile Include="Controller\TaskPaneController.cs" />
     <Compile Include="Controller\WpfInteractionController.cs" />

@@ -6,7 +6,7 @@ using ReactiveUI;
 
 namespace MaterializeExcel.View.Nodes
 {
-    public partial class ObjectNodeView : ReactiveUserControl<ObjectNodeViewModel>
+    public partial class ObjectNodeView : ReactiveUserControl<TableNodeViewModel>
     {
         public ObjectNodeView()
         {
@@ -17,7 +17,7 @@ namespace MaterializeExcel.View.Nodes
                 {
                     this.OneWayBind(ViewModel,
                             x => x.Name,
-                            x => x.ObjectName.Text)
+                            x => x.ObjectName.Content)
                         .DisposeWith(disposables);
                 });
         }

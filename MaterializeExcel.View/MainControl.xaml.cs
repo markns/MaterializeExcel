@@ -1,5 +1,6 @@
 ﻿using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
+using MahApps.Metro.IconPacks;
 using MaterializeExcelViewModel;
 using NLog;
 using ReactiveUI;
@@ -19,6 +20,15 @@ namespace MaterializeExcel.View
             // properly when running in Excel add in.
             RxApp.MainThreadScheduler.Schedule(() => { });
 
+            // import pack icon material else dependency is not compiled into assembly
+            // https://stackoverflow.com/a/40014591/57215
+            {
+                var unused = new PackIconMaterial();
+            }
+            {
+                var unused = new PackIconFontAwesome();
+            }
+            
             this
                 .WhenActivated(
                     disposables =>

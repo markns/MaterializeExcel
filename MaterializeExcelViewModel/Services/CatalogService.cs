@@ -50,10 +50,6 @@ namespace MaterializeExcelViewModel.Services
 
                         if (diff.Multiplicity > 0)
                         {
-                            // Logger.Info($"adding catalog node {schemaData.DatabaseNode.Name}|" +
-                                        // $"{schemaData.SchemaNode.Name}|{schemaData.ObjectNode.Name}|" +
-                                        // $"{schemaData.ColumnNode.Name}");
-
                             var additions = new List<ICatalogNode>();
                             additions.AddRange(new ICatalogNode[]
                                 {
@@ -63,7 +59,6 @@ namespace MaterializeExcelViewModel.Services
                                     schemaData.ColumnNode,
                                 }
                                 .Where(node => !_catalogNodes.Lookup(node.Id).HasValue));
-                            // Logger.Info($"new nodes {additions.Count}");
 
                             _catalogNodes.AddOrUpdate(additions);
                         }
@@ -79,47 +74,5 @@ namespace MaterializeExcelViewModel.Services
         }
 
         public IObservableCache<ICatalogNode, string> CatalogNodes => _catalogNodes.AsObservableCache();
-
-        // public void Promote(EmployeeDto promtedDto, int  newBoss)
-        // {
-        //     //in the real world, go to service then update the cache
-        //
-        //     //update the cache with the emploee, 
-        //     _employees.AddOrUpdate(new EmployeeDto(promtedDto.Id,promtedDto.Name,newBoss));
-        // }
-        //
-        //
-        // public void Sack(EmployeeDto sackEmp)
-        // {
-        //     //in the real world, go to service then updated the cache
-        //
-        //     _employees.Edit(updater =>
-        //     {
-        //         //assign new boss to the workers of the sacked employee
-        //         var workersWithNewBoss = updater.Items
-        //                             .Where(emp => emp.BossId == sackEmp.Id)
-        //                             .Select(dto => new EmployeeDto(dto.Id, dto.Name,  sackEmp.BossId))
-        //                             .ToArray();
-        //
-        //         updater.AddOrUpdate(workersWithNewBoss);
-        //
-        //         //get rid of the existing person
-        //         updater.Remove(sackEmp.Id);
-        //     });
-        //
-        //
-        // }
-
-        // private IEnumerable<EmployeeDto> CreateEmployees(int numberToLoad)
-        // {
-        //     var random = new Random();
-        //
-        //     return Enumerable.Range(1, numberToLoad)
-        //         .Select(i =>
-        //         {
-        //             var boss = i%1000 == 0 ? 0 : random.Next(0, i);
-        //             return new EmployeeDto(i, $"Person {i}", boss);
-        //         });
-        // }
     }
 }

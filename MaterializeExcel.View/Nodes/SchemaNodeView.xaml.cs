@@ -17,7 +17,7 @@ namespace MaterializeExcel.View.Nodes
                 {
                     this.OneWayBind(ViewModel,
                             x => x.Name,
-                            x => x.ObjectName.Text)
+                            x => x.ObjectName.Content)
                         .DisposeWith(disposables);
                 });
         }

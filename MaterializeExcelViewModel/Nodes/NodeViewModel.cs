@@ -140,7 +140,7 @@ namespace MaterializeExcelViewModel.Nodes
                 case SchemaNode _:
                     return new SchemaNodeViewModel(node, parent);
                 case ObjectNode _:
-                    return new ObjectNodeViewModel(node, parent);
+                    return new TableNodeViewModel(node, parent);
                 case ColumnNode _:
                     return new ColumnNodeViewModel(node, parent);
                 default:

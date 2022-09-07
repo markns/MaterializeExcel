@@ -35,19 +35,19 @@ namespace MaterializeExcel.TestApp
             var mzClient = new MzClient("Marks-MacBook-Pro.local", 6875,
                 "materialize", "materialize");
             builder.RegisterInstance(mzClient);
-            builder.RegisterType<CatalogService>().AsSelf();
+            builder.RegisterType<CatalogService>().SingleInstance();
             
             // https://github.com/reactiveui/splat/blob/main/src/Splat.Autofac/README.md
             builder.RegisterType<MainControl>().As<IViewFor<MainControlViewModel>>();
             builder.RegisterType<MainWindow>().As<IViewFor<MainWindowViewModel>>();
             builder.RegisterType<DatabaseNodeView>().As<IViewFor<DatabaseNodeViewModel>>();
             builder.RegisterType<SchemaNodeView>().As<IViewFor<SchemaNodeViewModel>>();
-            builder.RegisterType<ObjectNodeView>().As<IViewFor<ObjectNodeViewModel>>();
+            builder.RegisterType<ObjectNodeView>().As<IViewFor<TableNodeViewModel>>();
             builder.RegisterType<ColumnNodeView>().As<IViewFor<ColumnNodeViewModel>>();
             builder.RegisterType<MainWindowViewModel>().AsSelf();
             builder.RegisterType<MainControlViewModel>().AsSelf();
             builder.RegisterType<CatalogViewModel>().AsSelf();
-            builder.RegisterType<ObjectNodeViewModel>().AsSelf();
+            builder.RegisterType<TableNodeViewModel>().AsSelf();
             
             var container = builder.Build();
 

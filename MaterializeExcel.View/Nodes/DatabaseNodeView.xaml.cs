@@ -1,4 +1,5 @@
 ﻿using System.Reactive.Disposables;
+using MahApps.Metro.IconPacks;
 using MaterializeExcelViewModel.Nodes;
 using NLog;
 using ReactiveUI;
@@ -16,7 +17,7 @@ namespace MaterializeExcel.View.Nodes
                 {
                     this.OneWayBind(ViewModel,
                             x => x.Name,
-                            x => x.ObjectName.Text)
+                            x => x.ObjectName.Content)
                         .DisposeWith(disposables);
                 });
         }

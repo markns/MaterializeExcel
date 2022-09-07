@@ -16,7 +16,11 @@ namespace MaterializeExcel.View.Nodes
                 {
                     this.OneWayBind(ViewModel,
                             x => x.Name,
-                            x => x.ObjectName.Text)
+                            x => x.ObjectName.Content)
+                        .DisposeWith(disposables);
+                    this.OneWayBind(ViewModel,
+                            x => x.Type,
+                            x => x.Type.Content)
                         .DisposeWith(disposables);
                 });
         }

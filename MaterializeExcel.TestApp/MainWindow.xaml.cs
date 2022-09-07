@@ -1,5 +1,4 @@
 ﻿using System.Reactive.Disposables;
-using NLog;
 using ReactiveUI;
 
 
@@ -8,16 +7,12 @@ namespace MaterializeExcel.TestApp
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
+    public partial class MainWindow
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-
         public MainWindow(MainWindowViewModel mainWindowViewModel)
         {
             ViewModel = mainWindowViewModel;
             
-            Logger.Info($"-------------------- Starting main view {ViewModel}");
-
             InitializeComponent();
 
             this
