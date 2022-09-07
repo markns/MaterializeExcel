@@ -7,7 +7,7 @@
   &lt;Assembly Path="C:\Users\markn\Workspace\MaterializeExcelNew\MaterializeExcel\AddinXLib\AddinX.Ribbon.Implementation.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\markn\Workspace\MaterializeExcel\packages\ReactiveUI.Autofac.6.5.0\lib\net452\ReactiveUI.Autofac.dll" /&gt;&#xD;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=MaterializeExcelAddIn_002FController_002FMainViewHost/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/ResxEditorPersonal/CheckedGroups/=MaterializeExcel.AddIn_002FController_002FMainViewHost/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/ResxEditorPersonal/Initialized/@EntryValue">True</s:Boolean>
 	
 	

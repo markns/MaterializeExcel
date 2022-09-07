@@ -4,7 +4,7 @@ VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeClient", "MaterializeClient\MaterializeClient.csproj", "{44DFF1E9-A142-48BB-A1F6-6B7C3B512524}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcelAddIn", "MaterializeExcelAddIn\MaterializeExcelAddIn.csproj", "{B38AC7EF-FD6D-4082-BC8F-ECF58F74C39F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcel.AddIn", "MaterializeExcel.AddIn\MaterializeExcel.AddIn.csproj", "{B38AC7EF-FD6D-4082-BC8F-ECF58F74C39F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaterializeExcel.TestApp", "MaterializeExcel.TestApp\MaterializeExcel.TestApp.csproj", "{D8341856-0809-434A-97DD-34E6F05E0CD5}"
 EndProject
