@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reactive;
 using System.Reactive.Disposables;
 using DynamicData;
@@ -18,14 +19,18 @@ namespace MaterializeExcel.ViewModel.Nodes
         public TableNodeViewModel(Node<ICatalogNode, string> node, IMessageBus messageBus, NodeViewModel parent = null
         ) : base(node, messageBus, parent)
         {
+            var objectNode = node.Item as ObjectNode;
+
+            // todo: better way to handle this?
+            Debug.Assert(objectNode != null, nameof(objectNode) + " != null");
+
             AddToSheetCommand = ReactiveCommand.Create(
                 () => this.WhenAny(x => x.Name,
                     x => !string.IsNullOrEmpty(x.Value)));
             AddToSheetCommand.Subscribe(_ =>
             {
-                Logger.Info($"You clicked on AddToSheetCommand: Name is {Name}");
-                messageBus.SendMessage(new AddToSheetRequest("parent.Parent.Name",
-                    parent?.Name, Name));
+                Logger.Debug($"Executing AddToSheetCommand: {objectNode.Database}.{objectNode.Schema}.{Name}");
+                messageBus.SendMessage(new AddToSheetRequest(objectNode.Database, objectNode.Schema, Name));
             });
 
             _cleanUp = Disposable.Create(() => { AddToSheetCommand.Dispose(); });

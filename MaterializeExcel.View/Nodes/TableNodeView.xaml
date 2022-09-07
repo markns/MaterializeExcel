@@ -26,7 +26,7 @@
                Grid.Row="0"
                VerticalAlignment="Center"
                x:Name="ObjectName" />
-        <Button Grid.Column="2" ToolTip="Add to new sheet" Foreground="DarkGreen">
+        <Button Grid.Column="2" x:Name="AddToSheetButton" ToolTip="Add to new sheet" Foreground="DarkGreen">
             <iconPacks:PackIconMaterial Kind="MicrosoftExcel" />
         </Button>
 

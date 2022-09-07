@@ -8,8 +8,8 @@
 
         public AddToSheetRequest(string databaseName, string schemaName, string objectName)
         {
-            SchemaName = schemaName;
             DatabaseName = databaseName;
+            SchemaName = schemaName;
             ObjectName = objectName;
         }
     }

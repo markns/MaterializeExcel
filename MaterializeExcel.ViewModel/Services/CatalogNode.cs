@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MaterializeExcel.ViewModel.Services
 {
@@ -72,17 +73,19 @@ namespace MaterializeExcel.ViewModel.Services
 
     public class ObjectNode : CatalogNode
     {
-        public ObjectNode(string id, string ownerId, string name) : base(id, ownerId, name)
+        public ObjectNode(string id, string ownerId, string database, string schema, string name) : base(id, ownerId, name)
         {
+            Database = database;
+            Schema = schema;
         }
+
+        public string Schema { get; }
+
+        public string Database { get; }
     }
 
     public class ColumnNode : CatalogNode
     {
-        public long Position { get; }
-        public bool Nullable { get; }
-        public string Type { get; }
-
         public ColumnNode(string id, string ownerId, string name, long position, bool nullable, string type) : base(id,
             ownerId, name)
         {
@@ -90,5 +93,10 @@ namespace MaterializeExcel.ViewModel.Services
             Nullable = nullable;
             Type = type;
         }
+        
+        public long Position { get; }
+        public bool Nullable { get; }
+        public string Type { get; }
+
     }
 }

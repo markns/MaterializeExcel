@@ -37,6 +37,7 @@ namespace MaterializeExcel.TestApp
                 "materialize", "materialize");
             builder.RegisterInstance(mzClient);
             builder.RegisterType<CatalogService>().SingleInstance();
+            builder.RegisterInstance(MessageBus.Current);
             
             // https://github.com/reactiveui/splat/blob/main/src/Splat.Autofac/README.md
             builder.RegisterType<MainControl>().As<IViewFor<MainControlViewModel>>();

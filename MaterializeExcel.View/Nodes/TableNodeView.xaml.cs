@@ -19,6 +19,12 @@ namespace MaterializeExcel.View.Nodes
                             x => x.Name,
                             x => x.ObjectName.Content)
                         .DisposeWith(disposables);
+
+                    this
+                        .BindCommand(this.ViewModel,
+                            x => x.AddToSheetCommand,
+                            x => x.AddToSheetButton)
+                        .DisposeWith(disposables);
                 });
         }
     }

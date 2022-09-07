@@ -19,9 +19,10 @@ namespace MaterializeExcel.ViewModel.Services
                 new SchemaNode(resultRow["schema_oid"].ToString(), resultRow["database_oid"].ToString(),
                     (string)resultRow["schema"]);
 
+            // todo: separate source, table and view nodes
             ObjectNode =
                 new ObjectNode(resultRow["object_oid"].ToString(), resultRow["schema_oid"].ToString(),
-                    (string)resultRow["object_name"]);
+                    (string)resultRow["database"], (string)resultRow["schema"], (string)resultRow["object_name"]);
 
             ColumnNode =
                 new ColumnNode($"{resultRow["object_oid"]}:{resultRow["column"]}", resultRow["object_oid"].ToString(),
