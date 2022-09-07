@@ -17,7 +17,7 @@ namespace MaterializeExcel.ViewModel
         private readonly ReadOnlyObservableCollection<NodeViewModel> _catalogNodeViewModels;
         private readonly IDisposable _cleanUp;
 
-        public CatalogViewModel(CatalogService catalogService)
+        public CatalogViewModel(CatalogService catalogService, IMessageBus messageBus)
         {
             _catalogService = catalogService;
 
@@ -26,7 +26,7 @@ namespace MaterializeExcel.ViewModel
             //then transform into a fully recursive view model
             _cleanUp = catalogService.CatalogNodes.Connect()
                 .TransformToTree(node => node.OwnerId)
-                .Transform(n => NodeViewModel.GetViewModelForNode(n))
+                .Transform(n => NodeViewModel.GetViewModelForNode(n, messageBus))
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Bind(out _catalogNodeViewModels)
                 .DisposeMany()

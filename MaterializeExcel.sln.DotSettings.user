@@ -2,6 +2,7 @@
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005Cmarkn_005CWorkspace_005CMaterializeExcelNew_005CMaterializeExcel_005CAddinXLib_005CAddinX_002ERibbon_002EContract_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005Cmarkn_005CWorkspace_005CMaterializeExcelNew_005CMaterializeExcel_005CAddinXLib_005CAddinX_002ERibbon_002EExcelDna_002Edll/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/AddReferences/RecentPaths/=C_003A_005CUsers_005Cmarkn_005CWorkspace_005CMaterializeExcelNew_005CMaterializeExcel_005CAddinXLib_005CAddinX_002ERibbon_002EImplementation_002Edll/@EntryIndexedValue">True</s:Boolean>
+	<s:String x:Key="/Default/CodeInspection/Highlighting/SweaWarningsMode/@EntryValue">DoNotShowAndRun</s:String>
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;&#xD;
   &lt;Assembly Path="C:\Users\markn\Workspace\MaterializeExcelNew\MaterializeExcel\AddinXLib\AddinX.Ribbon.Implementation.dll" /&gt;&#xD;
   &lt;Assembly Path="C:\Users\markn\Workspace\MaterializeExcel\packages\ReactiveUI.Autofac.6.5.0\lib\net452\ReactiveUI.Autofac.dll" /&gt;&#xD;

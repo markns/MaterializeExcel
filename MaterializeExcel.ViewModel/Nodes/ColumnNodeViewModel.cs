@@ -2,6 +2,7 @@
 using DynamicData;
 using MaterializeExcel.ViewModel.Services;
 using MaterializeExcel.ViewModel.Services;
+using ReactiveUI;
 
 namespace MaterializeExcel.ViewModel.Nodes
 {
@@ -9,7 +10,7 @@ namespace MaterializeExcel.ViewModel.Nodes
     {
         public string Type { get; }
         
-        public ColumnNodeViewModel(Node<ICatalogNode,string> node, NodeViewModel parent = null) : base(node, parent)
+        public ColumnNodeViewModel(Node<ICatalogNode,string> node, IMessageBus messageBus, NodeViewModel parent = null) : base(node, messageBus, parent)
         {
             var columnNode = node.Item as ColumnNode;
 

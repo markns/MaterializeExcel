@@ -15,15 +15,15 @@ using ReactiveUI;
 
 namespace MaterializeExcel.ViewModel.Nodes
 {
-    public abstract class NodeViewModel : ReactiveObject, IEquatable<NodeViewModel>
+    public abstract class NodeViewModel : ReactiveObject, IEquatable<NodeViewModel>, IDisposable
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         private IDisposable _cleanUp;
         private bool _isExpanded;
         private bool _isSelected;
         private ReadOnlyObservableCollection<NodeViewModel> _children;
 
-        protected NodeViewModel(Node<ICatalogNode, string> node, NodeViewModel parent = null)
+        protected NodeViewModel(Node<ICatalogNode, string> node, IMessageBus messageBus, 
+            NodeViewModel parent = null)
         {
             Id = node.Key;
             Name = node.Item.Name;
@@ -33,7 +33,7 @@ namespace MaterializeExcel.ViewModel.Nodes
             
             //Wrap loader for the nested view model inside a lazy so we can control when it is invoked
             var childrenLoader = new Lazy<IDisposable>(() => node.Children.Connect()
-                .Transform(n => GetViewModelForNode(n, this))
+                .Transform(n => GetViewModelForNode(n, messageBus, this))
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .Bind(out _children)
                 .DisposeMany()
@@ -55,19 +55,9 @@ namespace MaterializeExcel.ViewModel.Nodes
                     var x = childrenLoader.Value;
                 });
 
-            AddToSheetCommand = ReactiveCommand.Create(
-                () => this.WhenAny(x => x.Name, 
-                    x => !string.IsNullOrEmpty(x.Value)));
-            AddToSheetCommand.Subscribe(_ =>
-            {
-                Logger.Info($"You clicked on AddToSheetCommand: Name is {Name}");
-                MessageBus.Current.SendMessage(new AddToSheetRequest("parent.Parent.Name", 
-                    parent?.Name, Name));
-            });
-            
             _cleanUp = Disposable.Create(() =>
             {
-                AddToSheetCommand.Dispose();
+
                 expander.Dispose();
                 if (childrenLoader.IsValueCreated)
                     childrenLoader.Value.Dispose();
@@ -83,7 +73,7 @@ namespace MaterializeExcel.ViewModel.Nodes
         public string OwnerId { get; }
         public Optional<NodeViewModel> Parent { get; }
         public ReadOnlyObservableCollection<NodeViewModel> Children => _children;
-        public ReactiveCommand<Unit, IObservable<bool>> AddToSheetCommand { get; protected set; }
+
 
         public bool IsExpanded
         {
@@ -132,18 +122,20 @@ namespace MaterializeExcel.ViewModel.Nodes
             _cleanUp.Dispose();
         }
 
-        public static NodeViewModel GetViewModelForNode(Node<ICatalogNode, string> node, NodeViewModel parent = null)
+        public static NodeViewModel GetViewModelForNode(Node<ICatalogNode, string> node,
+            IMessageBus messageBus,
+            NodeViewModel parent = null)
         {
             switch (node.Item)
             {
                 case DatabaseNode _:
-                    return new DatabaseNodeViewModel(node, parent);
+                    return new DatabaseNodeViewModel(node, messageBus, parent);
                 case SchemaNode _:
-                    return new SchemaNodeViewModel(node, parent);
+                    return new SchemaNodeViewModel(node, messageBus, parent);
                 case ObjectNode _:
-                    return new TableNodeViewModel(node, parent);
+                    return new TableNodeViewModel(node, messageBus, parent);
                 case ColumnNode _:
-                    return new ColumnNodeViewModel(node, parent);
+                    return new ColumnNodeViewModel(node, messageBus, parent);
                 default:
                     throw new ApplicationException("Unknown catalog type");
             }
