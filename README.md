@@ -4,7 +4,7 @@
 
 Excel is... better at displaying real-time data than many people realize.
 
-This add-in provides a single UDF `=MZ_TAIL(query)` where query is an object (source, table, view) name or select statement.
+This add-in connects one to the other. It provides a single UDF `=MZ_TAIL(query)` where query is an object (source, table, view) name or select statement.
 
 ![MZ_TAIL usage](doc/mz_tail.gif?raw=true "MZ_TAIL")
 
