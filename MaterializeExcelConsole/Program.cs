@@ -14,7 +14,7 @@ namespace MaterializeExcelConsole
 
         public static void Main(string[] args)
         {
-            var mzClient = new MzClient("Marks-MacBook-Pro.local", 6875, "materialize", "materialize");
+            var mzClient = new MzClient("localhost", 6875, "materialize", "materialize");
 
             const string query = "SELECT * FROM t";
 
@@ -36,5 +36,4 @@ namespace MaterializeExcelConsole
             Console.ReadLine();
         }
     }
-
 }
