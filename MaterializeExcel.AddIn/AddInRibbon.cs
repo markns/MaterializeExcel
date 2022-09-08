@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Runtime.InteropServices;
 using AddinX.Ribbon.Contract;
 using AddinX.Ribbon.Contract.Command;
@@ -7,7 +6,7 @@ using AddinX.Ribbon.ExcelDna;
 namespace MaterializeExcel.AddIn
 {
     [ComVisible(true)]
-    public class AddinRibbon : RibbonFluent
+    public class AddInRibbon : RibbonFluent
     {
         protected override void CreateFluentRibbon(IRibbonBuilder build)
         {
@@ -18,12 +17,8 @@ namespace MaterializeExcel.AddIn
                         g.AddGroup("Materialize").SetId("MaterializeGroup")
                             .Items(i =>
                             {
-                                https: //bert-toolkit.com/imagemso-list.html
-                                // i.AddButton("Config").SetId("ConfigIdCmd")
-                                //     .LargeSize().ImageMso("DataSourceCatalogServerScript").ShowLabel()
-                                //     .Screentip("");
                                 i.AddButton("Data Catalog").SetId("DataCatalogIdCmd")
-                                    .LargeSize().ImageMso("DataSourceCatalogServerScript").ShowLabel()
+                                    .LargeSize().ImageMso("TableOpenInBrowser").ShowLabel()
                                     .Screentip("");
                             });
                     }));
@@ -32,7 +27,7 @@ namespace MaterializeExcel.AddIn
         protected override void CreateRibbonCommand(IRibbonCommands cmds)
         {
             cmds.AddButtonCommand("DataCatalogIdCmd")
-                .IsEnabled(() => AddInContext.ExcelApp.Worksheets.Any()).IsVisible(() => true)
+                // .IsEnabled(() => AddInContext.ExcelApp.Worksheets.Any()).IsVisible(() => true)
                 .Action(() => AddInContext.MainController.TaskPane.OpenForm());
         }
 
@@ -42,7 +37,6 @@ namespace MaterializeExcel.AddIn
 
             AddInContext.MainController.Dispose();
 
-            AddInContext.ExcelApp.DisposeChildInstances(true);
             AddInContext.ExcelApp = null;
 
             AddInContext.Container.Dispose();
@@ -51,9 +45,9 @@ namespace MaterializeExcel.AddIn
 
         public override void OnOpening()
         {
-            AddInContext.ExcelApp.SheetSelectionChangeEvent += (a, e) => Ribbon?.Invalidate();
-            AddInContext.ExcelApp.SheetActivateEvent += (e) => Ribbon?.Invalidate();
-            AddInContext.ExcelApp.SheetChangeEvent += (a, e) => Ribbon?.Invalidate();
+            // AddInContext.ExcelApp.SheetSelectionChangeEvent += (a, e) => Ribbon?.Invalidate();
+            // AddInContext.ExcelApp.SheetActivateEvent += (e) => Ribbon?.Invalidate();
+            // AddInContext.ExcelApp.SheetChangeEvent += (a, e) => Ribbon?.Invalidate();
         }
     }
 }

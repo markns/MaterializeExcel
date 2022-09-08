@@ -5,7 +5,7 @@ using ExcelDna.IntelliSense;
 using ExcelDna.Logging;
 using ExcelDna.Registration;
 using MaterializeExcel.AddIn.Startup;
-using NetOffice.ExcelApi;
+using Microsoft.Office.Interop.Excel;
 using NLog;
 
 namespace MaterializeExcel.AddIn
@@ -21,23 +21,15 @@ namespace MaterializeExcel.AddIn
         {
             try
             {
-                // Locator.CurrentMutable.InitializeReactiveUI();
-                // Locator.CurrentMutable.InitializeSplat();
-                
-                // A helper method that will register all classes that derive off IViewFor 
-                // into our dependency injection container. ReactiveUI uses Splat for it's 
-                // dependency injection by default, but you can override this if you like.
-                // Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());                
-                
                 // Token cancellation is useful to close all existing Tasks<> before leaving the application
                 AddInContext.TokenCancellationSource = new CancellationTokenSource();
 
                 // The Excel Application object
-                AddInContext.ExcelApp = new Application(null, ExcelDnaUtil.Application);
+                AddInContext.ExcelApp = (Application)ExcelDnaUtil.Application;
 
                 // Start the bootstrapper now
                 new Bootstrapper(AddInContext.TokenCancellationSource.Token).Start();
-                
+
                 ExcelRegistration.GetExcelFunctions()
                     .ProcessAsyncRegistrations()
                     // .ProcessParamsRegistrations()
@@ -46,7 +38,7 @@ namespace MaterializeExcel.AddIn
                 IntelliSenseServer.Install();
 
                 // setup error handler
-                ExcelIntegration.RegisterUnhandledExceptionHandler(ex => "Unhandled Error: " + ex.ToString());
+                ExcelIntegration.RegisterUnhandledExceptionHandler(ex => $"Unhandled Error: {ex}");
             }
             catch (Exception e)
             {

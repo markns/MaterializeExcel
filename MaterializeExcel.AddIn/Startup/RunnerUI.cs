@@ -1,13 +1,17 @@
 ﻿using Autofac;
 using MaterializeExcel.AddIn.Startup.Contract;
 using MaterializeExcel.View;
+using MaterializeExcel.View.Nodes;
 using MaterializeExcel.ViewModel;
 using MaterializeExcel.ViewModel;
+using MaterializeExcel.ViewModel.Nodes;
 using ReactiveUI;
 using Splat.Autofac;
 
 namespace MaterializeExcel.AddIn.Startup
 {
+    // ReSharper disable once UnusedType.Global
+    // ReSharper disable once InconsistentNaming
     internal class RunnerUI : IRunner
     {
         public void Execute(IRunnerMain bootstrap)
@@ -22,23 +26,22 @@ namespace MaterializeExcel.AddIn.Startup
             bootstrapper?.Builder.RegisterInstance(autofacResolver);
             //
             // Initialize ReactiveUI components
-            autofacResolver.InitializeReactiveUI();
-            
+            autofacResolver?.InitializeReactiveUI();
+
             // If you need to override any service (such as the ViewLocator), register it after InitializeReactiveUI.
             // https://autofaccn.readthedocs.io/en/latest/register/registration.html#default-registrations
-            // builder.RegisterType<MyCustomViewLocator>().As<IViewLocator>().SingleInstance();
+            // bootstrapper?.Builder.RegisterType<MyCustomViewLocator>().As<IViewLocator>().SingleInstance();
             
             // https://github.com/reactiveui/splat/blob/main/src/Splat.Autofac/README.md
             bootstrapper?.Builder.RegisterType<MainControl>().As<IViewFor<MainControlViewModel>>();
-            
-            // Ribbon
-            // bootstrapper?.Builder.RegisterInstance(new AddinRibbon());
+            bootstrapper?.Builder.RegisterType<DatabaseNodeView>().As<IViewFor<DatabaseNodeViewModel>>();
+            bootstrapper?.Builder.RegisterType<SchemaNodeView>().As<IViewFor<SchemaNodeViewModel>>();
+            bootstrapper?.Builder.RegisterType<ObjectNodeView>().As<IViewFor<TableNodeViewModel>>();
+            bootstrapper?.Builder.RegisterType<ColumnNodeView>().As<IViewFor<ColumnNodeViewModel>>();
+            bootstrapper?.Builder.RegisterType<MainControlViewModel>().AsSelf();
+            bootstrapper?.Builder.RegisterType<CatalogViewModel>().AsSelf();
+            bootstrapper?.Builder.RegisterType<TableNodeViewModel>().AsSelf();
 
-            // ILogger
-            // bootstrapper?.Builder.RegisterInstance<ILogger>(new SerilogLogger());
-
-            // Event Aggregator
-            // bootstrapper?.Builder.RegisterInstance<IEventAggregator>(new EventAggregator());
         }
     }
 }

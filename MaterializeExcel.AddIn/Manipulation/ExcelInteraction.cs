@@ -1,90 +1,70 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using MaterializeExcel.Events;
-using NetOffice.ExcelApi;
-using NetOffice.ExcelApi.Enums;
+using Microsoft.Office.Interop.Excel;
 
 namespace MaterializeExcel.AddIn.Manipulation
 {
     public class ExcelInteraction
     {
-        private readonly Application excelApp;
+        private readonly Application _excelApp;
 
-        public ExcelInteraction(Application excelApp)
+        public ExcelInteraction()
         {
-            this.excelApp = excelApp;
-        }
-
-        public IList<string> WorksheetsName()
-        {
-
-            if (excelApp?.Sheets == null)
-            {
-                return new List<string>();
-            }
-            return excelApp.Sheets
-                .Select(sheet => ((Worksheet)sheet).Name)
-                .ToList();
-
+            _excelApp = AddInContext.ExcelApp;
         }
 
         public void WriteQueryToSheet(AddToSheetRequest request)
         {
-        
-            // var sheet = (Worksheet)excelApp.Sheets
-            //     .First(o => ((Worksheet)o).Name
-            //                 == request.SheetDestination);
-            //
-            // // Write Header
-            // var header = new List<object> { "Name", "Date", "Start", "End" };
-            //
-            // var destination = sheet.get_Range("A1", Type.Missing);
-            // WriteListHorizontally(destination, header);
-            //
-            // // find the next empty cell from column A
-            // var nextRow = 2;
-            // if (!string.IsNullOrEmpty(sheet.Cells[2, 1]?.Value?.ToString()))
-            // {
-            //     var lastCell = sheet.Cells[1, 1].End(XlDirection.xlDown);
-            //     nextRow = lastCell.Row + 1;
-            // }
-            //
-            // var entry = new List<object>
-            // {
-            //     request.Data.Name,
-            //     request.Data.Date.Date.ToString("d"),
-            //     request.Data.StartingTime.ToString("hh:mm"),
-            //     request.Data.EndTime.ToString("hh:mm")
-            // };
-            //
-            // destination = sheet.Cells[nextRow, 1];
-            // WriteListHorizontally(destination, entry);
-        
+            var wb = _excelApp.ActiveWorkbook;
+            if (wb == null)
+                return;
+
+            var fullyQualifiedName = GetFullyQualifiedName(request);
+            dynamic ws = AddNewSheet(wb, fullyQualifiedName);
+            ws.Range["A1"].Formula2 = $"=MZ_TAIL(\"{fullyQualifiedName}\")";
         }
 
-        private Range WriteListHorizontally(Range destination, IList<object> list)
+        private static string GetFullyQualifiedName(AddToSheetRequest request)
         {
-            var data = new object[1, list.Count];
-            for (var i = 0; i < list.Count; i++)
+            // system is not a real database name, so exclude from fq name
+            return request.DatabaseName == "system"
+                ? $"{request.SchemaName}.{request.ObjectName}"
+                : $"{request.DatabaseName}.{request.SchemaName}.{request.ObjectName}";
+        }
+
+        private static string Truncate(string value, int maxLength)
+        {
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength);
+        }
+
+        private static Worksheet AddNewSheet(Workbook workbook, string sheetName)
+        {
+            Worksheet worksheet = workbook.Worksheets.Add(Type: XlSheetType.xlWorksheet);
+
+            string[] invalidChars = { ":", "\"", "/", "?", "*", "[", "]" };
+            var pattern = string.Join("|", invalidChars.Select(Regex.Escape));
+            var safeName = Regex.Replace(sheetName, pattern, "_");
+            // sheet name max len is 31, but leave a few chars for duplicates
+            safeName = Truncate(safeName, 26);
+
+            var nextIndex = 0;
+            foreach (Worksheet sheet in workbook.Worksheets)
             {
-                data[0, i] = list[i];
+                if (sheet.Name.StartsWith(safeName))
+                {
+                    if (nextIndex == 0)
+                        nextIndex = 1;
+                    var m = Regex.Match(sheet.Name, @"\((?<index>\d+)\)$");
+                    if (!m.Success) continue;
+                    var match = int.Parse(m.Groups["index"].Value);
+                    if (match >= nextIndex)
+                        nextIndex = match + 1;
+                }
             }
-            return WriteRange(destination, data);
-        }
 
-        private Range WriteRange(Range destinationFirstCell, object[,] data)
-        {
-            // Create a Range of the correct size:
-            var rows = data.GetLength(0);
-            var columns = data.GetLength(1);
-
-            var range = destinationFirstCell;
-            range = range.get_Resize(rows, columns);
-
-            // Assign the Array to the Range in one shot:
-            range.set_Value(Type.Missing, data);
-            return range;
+            worksheet.Name = nextIndex == 0 ? safeName : $"{safeName} ({nextIndex})";
+            return worksheet;
         }
     }
 }

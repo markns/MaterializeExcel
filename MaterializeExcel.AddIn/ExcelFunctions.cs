@@ -1,14 +1,10 @@
 using System;
 using ExcelDna.Integration;
 using MaterializeClient;
-using MaterializeExcel.AddIn.Properties;
 using NLog;
-using NLog.Fluent;
 
 namespace MaterializeExcel.AddIn
 {
-    // Initialization [Error] Method not registered - unsupported signature, abstract or generic: 'MaterializeExcelFunctions.MZ_TAIL'
-
     public static class MaterializeExcelFunctions
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
@@ -20,19 +16,11 @@ namespace MaterializeExcel.AddIn
             ] string query)
         {
             Logger.Info($"Requesting tail for query {query}");
-            var mzClient = GetMzClient();
-            return mzClient.Tail(query)
+            return AddInContext.MzClient.Tail(query)
                 .ProgressBatch()
                 .ScanToMultiSet()
                 .MultiSetTo2DArray();
         }
 
-        private static MzClient GetMzClient()
-        {
-            return new MzClient(Settings.Default.Host,
-                Settings.Default.Port,
-                Settings.Default.Database,
-                Settings.Default.User);
-        }
     }
 }

@@ -10,7 +10,6 @@
                                 mc:Ignorable="d"
                                 d:DataContext="{d:DesignInstance viewModel:MainControlViewModel, IsDesignTimeCreatable=False}"
                                 FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-
                                 TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                                 Background="{DynamicResource MaterialDesignPaper}"
                                 HorizontalAlignment="Stretch"
@@ -32,44 +31,26 @@
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesigntheme.button.xaml" />
                 <!-- -->
             </ResourceDictionary.MergedDictionaries>
-
             <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <StackPanel>
-        <Label>Stuff</Label>
-        
-        <!-- ItemsSource="{Binding CatalogNodeViewModels}" -->
-        <!-- DataContext="{Binding Catalog }">         -->
-        <TreeView x:Name="CatalogTree">
 
-            <TreeView.Resources>
+    <TreeView x:Name="CatalogTree" BorderThickness="0">
 
-                <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource MahApps.Styles.TreeViewItem}">
-                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
-                </Style>
+        <TreeView.Resources>
 
-                <!-- <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource MahApps.Styles.TreeViewItem}"> -->
-                <!--     ~1~ <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource MetroTreeViewItem}"> @1@ -->
-                <!--     <Setter Property="IsExpanded" -->
-                <!--             Value="{Binding IsExpanded,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" /> -->
-                <!--     <Setter Property="IsSelected" -->
-                <!--             Value="{Binding IsSelected,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" /> -->
-                <!-- </Style> -->
+            <Style TargetType="{x:Type TreeViewItem}" BasedOn="{StaticResource MahApps.Styles.TreeViewItem}">
+                <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+            </Style>
 
-                <HierarchicalDataTemplate DataType="{x:Type nodes:NodeViewModel}"
-                                          ItemsSource="{Binding Children}">
-                    <!-- <view:CatalogNodeView /> -->
-                    <reactiveUi:ViewModelViewHost ViewModel="{Binding ViewModel}" />
+            <HierarchicalDataTemplate DataType="{x:Type nodes:NodeViewModel}"
+                                      ItemsSource="{Binding Children}">
+                <reactiveUi:ViewModelViewHost ViewModel="{Binding ViewModel}" />
+            </HierarchicalDataTemplate>
+        </TreeView.Resources>
 
-                </HierarchicalDataTemplate>
-            </TreeView.Resources>
-
-        </TreeView>
-    </StackPanel>
-
+    </TreeView>
 
 </reactiveUi:ReactiveUserControl>

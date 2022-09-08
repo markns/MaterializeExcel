@@ -1,48 +1,33 @@
-
 using System;
 using System.Collections.Generic;
-using AddinX.Wpf.Contract;
 using ExcelDna.Integration.CustomUI;
 using MaterializeExcel.View;
-using MaterializeExcel.ViewModel;
 using MaterializeExcel.ViewModel;
 using ReactiveUI;
 using Splat;
 
 namespace MaterializeExcel.AddIn.Controller
 {
-    public class TaskPaneController : IDisposable
+    // ReSharper disable once ClassNeverInstantiated.Global
+    public class TaskPaneController : IDisposable  
     {
         public static CustomTaskPane MyPanel;
 
         private static readonly Dictionary<string, CustomTaskPane> MyTaskPanes =
             new Dictionary<string, CustomTaskPane>();
 
-        private readonly ILogger logger;
-        private IWpfHelper wpfHelper;
-
-        // Autofac.Core.DependencyResolutionException:
-        // An exception was thrown while activating
-        // MaterializeExcel.AddIn.Controller.MainController -> MaterializeExcel.AddIn.Controller.TaskPaneController.
-        // ---> Autofac.Core.DependencyResolutionException: None of the constructors found with 'Autofac.Core.Activators.Reflection.DefaultConstructorFinder' on type 'MaterializeExcel.AddIn.Controller.TaskPaneController' can be invoked with the available services and parameters:
-        // Cannot resolve parameter 'Splat.ILogger logger' of constructor 'Void .ctor(Splat.ILogger, AddinX.Wpf.Contract.IWpfHelper)'.
-        
-        public TaskPaneController(IWpfHelper wpfHelper)
-        {
-            // this.logger = logger;
-            this.wpfHelper = wpfHelper;
-        }
-
         public void OpenForm()
         {
+            // TODO: handle opening and closing task pane
+
             // var excel = (Application) ExcelDnaUtil.Application;
             // var key = $"materializeExcel-({excel.Hwnd})";
             //
             // if (!MyTaskPanes.ContainsKey(key))
             // {
-            
-            var view = (MainControl)Locator.Current.GetService(typeof (IViewFor<MainControlViewModel>));
-            
+
+            var view = (MainControl)Locator.Current.GetService(typeof(IViewFor<MainControlViewModel>));
+
             var mainViewHost = new MainViewHost(view);
 
             MyPanel =
@@ -66,7 +51,7 @@ namespace MaterializeExcel.AddIn.Controller
 
         public void Dispose()
         {
-            wpfHelper = null;
+            // todo: dispose task pane
         }
     }
 }

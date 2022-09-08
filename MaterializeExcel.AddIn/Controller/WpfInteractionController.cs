@@ -1,4 +1,5 @@
 using System;
+using System.Reactive.Linq;
 using MaterializeExcel.AddIn.Manipulation;
 using MaterializeExcel.Events;
 using NLog;
@@ -6,70 +7,42 @@ using ReactiveUI;
 
 namespace MaterializeExcel.AddIn.Controller
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class WpfInteractionController : IDisposable
     {
-        // private readonly IEventAggregator eventAgg;
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private readonly ExcelInteraction _excelInteraction;
-        // private readonly SubscriptionToken tokenMeetingData;
         private readonly IDisposable _addToSheetSubscription;
 
-        public WpfInteractionController(ExcelInteraction excelInteraction)
+        public WpfInteractionController(ExcelInteraction excelInteraction, IMessageBus messageBus)
         {
-            // this.eventAgg = eventAgg;
             _excelInteraction = excelInteraction;
-
-            _addToSheetSubscription = MessageBus.Current.Listen<AddToSheetRequest>()
-                // .Where(e => e.KeyCode == KeyCode.Up)
-                .Subscribe(x => Console.WriteLine(x.ObjectName));
-            
-            // tokenMeetingData = eventAgg.GetEvent<PubSubEvent<ExcelMeetingDataRequest>>()
-            //     .Subscribe(WriteMeetingData);
-            //
-            // tokenSheetName = eventAgg.GetEvent<PubSubEvent<ExcelWorksheetNamesRequest>>()
-            //     .Subscribe(GetWorksheetsName);
+            _addToSheetSubscription = messageBus.Listen<AddToSheetRequest>()
+                .ObserveOn(RxApp.MainThreadScheduler)
+                .Subscribe(WriteRequestToSheet);
         }
 
-        // private void GetWorksheetsName(ExcelWorksheetNamesRequest obj)
-        // {
-        //     logger.Debug("Return excel sheets names");
-        //
-        //     var response = new ExcelWorksheetNamesResponse
-        //     {
-        //         SheetNames = excelOperation.WorksheetsName().ToArray(),
-        //     };
-        //
-        //     eventAgg.GetEvent<PubSubEvent<ExcelWorksheetNamesResponse>>()
-        //         .Publish(response);
-        // }
-        //
-        private void WriteMeetingData(AddToSheetRequest request)
+        private void WriteRequestToSheet(AddToSheetRequest request)
         {
-            // logger.Debug("Write Meeting data");
             try
             {
                 _excelInteraction.WriteQueryToSheet(request);
-                // eventAgg.GetEvent<PubSubEvent<ExcelMeetingDataResponse>>()
-                    // .Publish(new ExcelMeetingDataResponse
-                    // { ProcessCompletedSuccessfully = true });
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                // TODO: return event with failure details, and use UserControlExtensions to pop up warning.
+                Logger.Error($"{e.Message} {e.StackTrace}");
                 // eventAgg.GetEvent<PubSubEvent<ExcelMeetingDataResponse>>()
-                    // .Publish(new ExcelMeetingDataResponse
-                    // { ProcessCompletedSuccessfully = false });
+                // .Publish(new ExcelMeetingDataResponse
+                // { ProcessCompletedSuccessfully = false });
+                throw;
             }
-        
         }
 
         public void Dispose()
         {
             _addToSheetSubscription.Dispose();
-            
-            // eventAgg.GetEvent<PubSubEvent<ExcelMeetingDataRequest>>()
-            //     .Unsubscribe(tokenMeetingData);
-            //
-            // eventAgg.GetEvent<PubSubEvent<ExcelWorksheetNamesRequest>>()
-            //     .Unsubscribe(tokenSheetName);
         }
     }
 }

@@ -1,8 +1,9 @@
-using AddinX.Wpf.Contract;
-using AddinX.Wpf.Implementation;
 using Autofac;
+using MaterializeClient;
 using MaterializeExcel.AddIn.Manipulation;
+using MaterializeExcel.AddIn.Properties;
 using MaterializeExcel.AddIn.Startup.Contract;
+using MaterializeExcel.ViewModel.Services;
 
 namespace MaterializeExcel.AddIn.Startup
 {
@@ -13,8 +14,18 @@ namespace MaterializeExcel.AddIn.Startup
         {
             var bootstrapper = (Bootstrapper)bootstrap;
             bootstrapper?.Builder.RegisterType<ExcelInteraction>();
+            
+            bootstrapper?.Builder.RegisterInstance(GetMzClient());
+            bootstrapper?.Builder.RegisterType<CatalogService>().SingleInstance();
+            
+        }
 
-            bootstrapper?.Builder.RegisterType<ExcelDnaWpfHelper>().As<IWpfHelper>();
+        private static MzClient GetMzClient()
+        {
+            return new MzClient(Settings.Default.Host,
+                Settings.Default.Port,
+                Settings.Default.Database,
+                Settings.Default.User);
         }
     }
 }

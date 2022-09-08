@@ -1,6 +1,6 @@
-
 using Autofac;
 using MaterializeExcel.AddIn.Startup.Contract;
+using ReactiveUI;
 
 namespace MaterializeExcel.AddIn.Startup
 {
@@ -12,17 +12,18 @@ namespace MaterializeExcel.AddIn.Startup
             var bootstrapper = (Bootstrapper)bootstrap;
 
             // Excel Application
-            bootstrapper?.Builder.RegisterInstance(AddInContext.ExcelApp).ExternallyOwned();
+            // todo: this breaks autofac somehow.
+            // bootstrapper?.Builder.RegisterInstance(AddInContext.ExcelApp).ExternallyOwned();
 
             // Ribbon
-            bootstrapper?.Builder.RegisterInstance(new AddinRibbon());
+            bootstrapper?.Builder.RegisterInstance(new AddInRibbon());
 
             // ILogger
+            // todo: inject logger?
             // bootstrapper?.Builder.RegisterInstance<ILogger>(new SerilogLogger());
 
             // Event Aggregator
-            // bootstrapper?.Builder.RegisterInstance<IEventAggregator>(new EventAggregator());
-
+            bootstrapper?.Builder.RegisterInstance(MessageBus.Current);
         }
     }
 }

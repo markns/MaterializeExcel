@@ -2,6 +2,7 @@ using System;
 
 namespace MaterializeExcel.AddIn.Controller
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class MainController :IDisposable
     {
         public MainController(TaskPaneController taskPane
